@@ -1,0 +1,90 @@
+/* Floating Calculator Toggle Button */
+#calc-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 10000;
+}
+
+#calc-toggle-btn:hover {
+    background: #0056b3;
+}
+
+/* Calculator Container */
+.floating-calculator {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 260px;
+    background: #222;
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    font-family: Arial, sans-serif;
+    transition: all 0.3s ease-in-out;
+    z-index: 9999;
+}
+
+.floating-calculator.hidden {
+    display: none;
+}
+
+.calc-header {
+    background: #444;
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.calc-body {
+    padding: 10px;
+}
+
+.calc-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.calc-buttons button {
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    background: #555;
+    color: white;
+    cursor: pointer;
+}
+
+.calc-buttons button:hover {
+    background: #777;
+}
+
+#widget-display {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 18px;
+    text-align: right;
+    border-radius: 6px;
+    border: none;
+}

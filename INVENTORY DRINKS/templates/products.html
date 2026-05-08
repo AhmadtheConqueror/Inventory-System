@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Belloson Inventory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    <button id="darkModeToggle" style="position: fixed; top: 15px; right: 20px; z-index: 1000;">
+        🌙 Toggle Dark Mode
+    </button>
+    <style>
+        .add-stock-form {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .add-stock-form input {
+            width: 70px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Management</h1>
+
+       <div class="tabs">
+      <a href="{{ url_for('inventory') }}" class="tab {% if request.endpoint == 'inventory' %}active{% endif %}">Inventory</a>
+      <a href="{{ url_for('products') }}" class="tab {% if request.endpoint == 'products' %}active{% endif %}">Products</a>
+      <a href="{{ url_for('customers') }}" class="tab {% if request.endpoint == 'customers' %}active{% endif %}">Customers</a>
+      <a href="{{ url_for('invoices') }}" class="tab {% if request.endpoint == 'invoices' %}active{% endif %}">Invoices</a>
+      <a href="{{ url_for('expenses') }}" class="tab {% if request.endpoint == 'expenses' %}active{% endif %}">Expenses</a>
+      <a href="{{ url_for('debts') }}" class="tab {% if request.endpoint == 'debts' %}active{% endif %}">Debts</a>
+      <a href="{{ url_for('reports') }}" class="tab {% if request.endpoint == 'reports' %}active{% endif %}">Reports</a>
+      <a href="{{ url_for('profile') }}" class="tab {% if request.endpoint == 'profile' %}active{% endif %}">Profile</a>
+      <a href="{{ url_for('logout') }}" class="tab" style="background-color: #f8d7da; color: #721c24;">Logout</a>
+    </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="card">
+            <h2>Add New Product</h2>
+            <form action="{{ url_for('products') }}" method="POST" class="form-row">
+                <input type="text" name="name" placeholder="Product Name" required>
+                <input type="number" name="quantity" placeholder="Initial Quantity" min="0" step="any" required>
+                <input type="number" name="selling_price" placeholder="Selling Price (₦)" step="0.01" min="0" required>
+                <input type="number" name="cost_price" placeholder="Cost Price (₦)" step="0.01" min="0" required>
+                <input type="date" name="expiry_date" placeholder="Expiry Date" required>
+                <button type="submit">Add Product</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Search Products</h2>
+            <form action="{{ url_for('products') }}" method="GET" class="form-row">
+                <input type="text" name="q" placeholder="Search by product name..." value="{{ search_query or '' }}">
+                <button type="submit" class="btn btn-primary">Search</button>
+                <a href="{{ url_for('products') }}" class="btn btn-secondary">Clear</a>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>All Products</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Current Stock</th>
+                            <th>Selling Price</th>
+                            <th>Cost Price</th>
+                            <th>Expiry Date</th>
+                            <th>Add Stock</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td>{{ product.name }}</td>
+                            <td><strong>{{ product.quantity }}</strong></td>
+                            <td>₦{{ "%.2f"|format(product.selling_price) }}</td>
+                            <td>₦{{ "%.2f"|format(product.cost_price) }}</td>
+                            <td>{{ product.expiry_date.strftime('%Y-%m-%d') if product.expiry_date else 'N/A' }}</td>
+                            <td>
+                                <form action="{{ url_for('add_stock', product_id=product.id) }}" method="POST" class="add-stock-form">
+                                    <input type="number" name="quantity" min="0.01" step="any" required>
+                                    <button type="submit" class="btn btn-success btn-sm">+</button>
+                                </form>
+                            </td>
+                            <td class="actions">
+                                <a href="{{ url_for('edit_product', product_id=product.id) }}" class="btn btn-secondary">Edit</a>
+                                <form action="{{ url_for('delete_product', product_id=product.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure?');">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7" style="text-align: center;">No products found for your search.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Product</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <button id="darkModeToggle" style="position: fixed; top: 15px; right: 20px; z-index: 1000;">
+    🌙 Toggle Dark Mode
+  </button>
+
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 25px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: #7f8c8d;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Edit Product</h1>
+
+    <form method="POST">
+      <label for="name">Product Name</label>
+      <input type="text" name="name" id="name" value="{{ product.name }}" required>
+
+      <label for="quantity">Quantity</label>
+      <input type="number" step="any" name="quantity" id="quantity" value="{{ product.quantity }}" required>
+
+      <label for="selling_price">Selling Price</label>
+      <input type="number" step="any" name="selling_price" id="selling_price" value="{{ product.selling_price }}" required>
+
+      <label for="cost_price">Cost Price</label>
+      <input type="number" step="any" name="cost_price" id="cost_price" value="{{ product.cost_price }}" required>
+
+      <label for="expiry_date">Expiry Date</label>
+      <input type="date" name="expiry_date" id="expiry_date"
+             value="{{ product.expiry_date.strftime('%Y-%m-%d') if product.expiry_date else '' }}"
+             placeholder="YYYY-MM-DD">
+
+      <button type="submit">Update Product</button>
+    </form>
+
+    <a href="{{ url_for('products') }}" class="back-link">← Back to Products</a>
+  </div>
+</body>
+</html>

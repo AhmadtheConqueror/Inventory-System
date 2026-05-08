@@ -1,0 +1,44 @@
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5052
+Press CTRL+C to quit
+127.0.0.1 - - [08/May/2026 18:16:33] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:16:41] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:17:27] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:17:37] "GET /register HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:18:42] "GET /register HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:19:56] "GET /register HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:20:25] "POST /register HTTP/1.1" 302 -
+127.0.0.1 - - [08/May/2026 18:20:25] "GET /login HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:20:35] "POST /login HTTP/1.1" 302 -
+127.0.0.1 - - [08/May/2026 18:20:35] "GET /inventory HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:20:35] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:35] "GET /static/calculator.css HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:35] "GET /static/calculator.js HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:35] "GET /static/script.js HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:20:40] "GET /products HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:20:40] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:40] "GET /static/script.js HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:42] "GET /customers HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:20:42] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:42] "GET /static/script.js HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:43] "GET /invoices HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:20:43] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:43] "GET /static/script.js HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:44] "GET /expenses HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:20:44] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:44] "GET /static/script.js HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:44] "GET /debts HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:20:44] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:44] "GET /static/script.js HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:45] "GET /reports HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:20:45] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:45] "GET /static/script.js HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:49] "GET /profile HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:20:49] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:49] "GET /static/profile_pics/default.jpg HTTP/1.1" 404 -
+127.0.0.1 - - [08/May/2026 18:20:49] "GET /static/script.js HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:52] "GET /inventory HTTP/1.1" 200 -
+127.0.0.1 - - [08/May/2026 18:20:52] "GET /static/calculator.css HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:52] "GET /static/script.js HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:52] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [08/May/2026 18:20:52] "GET /static/calculator.js HTTP/1.1" 304 -

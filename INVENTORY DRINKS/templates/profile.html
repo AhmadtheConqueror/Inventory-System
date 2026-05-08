@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Belloson Inventory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+     <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+    <button id="darkModeToggle" style="position: fixed; top: 15px; right: 20px; z-index: 1000;">
+  🌙 Toggle Dark Mode
+</button>
+    <style>
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            align-items: start;
+        }
+        .profile-sidebar .card {
+            text-align: center;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 4px solid #eee;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+        .btn-primary { background-color: #007bff; }
+        .btn-secondary { background-color: #6c757d; }
+        .btn-danger { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile & Settings</h1>
+        
+        <!-- FIX: Standardized the navigation bar -->
+        <div class="tabs">
+      <a href="{{ url_for('inventory') }}" class="tab {% if request.endpoint == 'inventory' %}active{% endif %}">Inventory</a>
+      <a href="{{ url_for('products') }}" class="tab {% if request.endpoint == 'products' %}active{% endif %}">Products</a>
+      <a href="{{ url_for('customers') }}" class="tab {% if request.endpoint == 'customers' %}active{% endif %}">Customers</a>
+      <a href="{{ url_for('invoices') }}" class="tab {% if request.endpoint == 'invoices' %}active{% endif %}">Invoices</a>
+      <a href="{{ url_for('expenses') }}" class="tab {% if request.endpoint == 'expenses' %}active{% endif %}">Expenses</a>
+      <a href="{{ url_for('debts') }}" class="tab {% if request.endpoint == 'debts' %}active{% endif %}">Debts</a>
+      <a href="{{ url_for('reports') }}" class="tab {% if request.endpoint == 'reports' %}active{% endif %}">Reports</a>
+      <a href="{{ url_for('profile') }}" class="tab {% if request.endpoint == 'profile' %}active{% endif %}">Profile</a>
+      <a href="{{ url_for('logout') }}" class="tab" style="background-color: #f8d7da; color: #721c24;">Logout</a>
+    </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="profile-container">
+            <div class="profile-sidebar">
+                <div class="card">
+                    <h2>Your Profile</h2>
+                    <img src="{{ url_for('static', filename='profile_pics/' + current_user.profile_image) }}" alt="Profile Picture" class="profile-pic">
+                    <h3>{{ current_user.full_name or current_user.username }}</h3>
+                </div>
+            </div>
+
+            <div class="profile-main">
+                <div class="card">
+                    <h2>Update Profile Information</h2>
+                    <form method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="form_name" value="update_profile">
+                        <div class="form-group">
+                            <label for="full_name">Full Name</label>
+                            <input type="text" name="full_name" id="full_name" value="{{ current_user.full_name or '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile_image">Update Profile Picture</label>
+                            <input type="file" name="profile_image" id="profile_image" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h2>Change Password</h2>
+                    <form method="POST">
+                        <input type="hidden" name="form_name" value="change_password">
+                        <div class="form-group">
+                            <label for="old_password">Current Password</label>
+                            <input type="password" name="old_password" id="old_password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new_password">New Password</label>
+                            <input type="password" name="new_password" id="new_password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_new_password">Confirm New Password</label>
+                            <input type="password" name="confirm_new_password" id="confirm_new_password" required>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Change Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Link Debts to Sales</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Link Debts to Sales (Admin)</h2>
+    <p>Use this page to manually associate debts with their originating sales when automatic matching is unavailable.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Debt ID</th>
+          <th>Customer</th>
+          <th>Original Amount</th>
+          <th>Date</th>
+          <th>Candidate Sales</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in debts %}
+        <tr>
+          <td>{{ d.id }}</td>
+          <td>{{ d.customer_name }}</td>
+          <td>{{ "{:,.2f}".format(d.original_amount) }}</td>
+          <td>{{ d.date }}</td>
+          <td>
+            <form method="post" action="{{ url_for('link_debt', debt_id=d.id) }}">
+              <select name="sale_id">
+                <option value="">-- Select Sale (optional) --</option>
+                {% for s in candidates.get(d.id, []) %}
+                <option value="{{ s.id }}">Sale #{{ s.id }} — {{ s.date.strftime('%Y-%m-%d %H:%M') }} — {{ "{:,.2f}".format(s.total_amount or 0) }}</option>
+                {% endfor %}
+              </select>
+          </td>
+          <td>
+              <button type="submit" class="btn">Link</button>
+            </form>
+          </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6">No debts to link.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p><a href="{{ url_for('debts') }}">Back to Debts</a></p>
+  </div>
+</body>
+</html>

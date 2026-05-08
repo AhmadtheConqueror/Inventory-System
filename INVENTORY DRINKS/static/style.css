@@ -1,0 +1,375 @@
+/* --- Google Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* --- CSS Variables for Easy Theming --- */
+:root {
+    --primary-blue: #0056b3;
+    --secondary-blue: #007bff;
+    --light-blue: #e0f0ff;
+    --dark-blue: #003d80;
+    --text-dark: #2c3e50;
+    --text-light: #f8f9fa;
+    --background-light: #f8f9fa;
+    --background-dark: #121212;
+    --card-bg-light: #ffffff;
+    --card-bg-dark: #1e1e1e;
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+}
+
+/* --- General Body and Typography --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    font-weight: 600;
+    color: var(--dark-blue);
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--light-blue);
+    padding-bottom: 10px;
+}
+
+/* --- Card Styling with Animation --- */
+.card {
+    background-color: var(--card-bg-light);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px var(--shadow-color);
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fade-in-up 0.5s ease forwards;
+}
+
+@keyframes fade-in-up {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--shadow-color);
+}
+
+/* --- Navigation Tabs --- */
+.tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: var(--primary-blue);
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 50px; /* Pill shape */
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tab:hover {
+    background-color: var(--light-blue);
+    border-color: var(--secondary-blue);
+    transform: translateY(-2px);
+}
+
+.tab.active {
+    background-color: var(--primary-blue);
+    color: var(--text-light);
+    border-color: var(--primary-blue);
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+/* --- Form Elements --- */
+.form-row, .form-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"],
+select {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    flex: 1;
+    min-width: 150px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--secondary-blue);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+/* --- Button Styling --- */
+.btn, button {
+    background-color: var(--secondary-blue);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover, button:hover {
+    background-color: var(--dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+
+.btn-danger, .btn-danger:hover {
+    background-color: var(--danger-color);
+}
+
+.btn-secondary, .btn-secondary:hover {
+    background-color: #6c757d;
+}
+
+/* --- Table Styling --- */
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--light-blue);
+    color: var(--dark-blue);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background-color: #f1f9ff;
+}
+
+/* --- Flash Messages --- */
+.flash {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    border-left: 5px solid;
+    opacity: 0;
+    animation: fade-in-up 0.4s ease forwards;
+}
+
+.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.flash-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.flash-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-color: #bee5eb;
+}
+
+/* --- Dark Mode --- */
+body.dark-mode {
+    background-color: var(--background-dark);
+    color: var(--text-light);
+}
+
+body.dark-mode .card {
+    background-color: var(--card-bg-dark);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3 {
+    color: #a9cfff;
+}
+
+body.dark-mode .tab {
+    background-color: #2a2a2a;
+    color: #ccc;
+    border-color: #444;
+}
+
+body.dark-mode .tab.active {
+    background-color: var(--secondary-blue);
+    color: var(--text-light);
+    border-color: var(--secondary-blue);
+}
+
+body.dark-mode input, body.dark-mode select, body.dark-mode textarea {
+    background-color: #2a2a2a;
+    color: #fff;
+    border: 1px solid #444;
+}
+
+body.dark-mode th {
+    background-color: #2c3e50;
+    color: var(--light-blue);
+}
+
+body.dark-mode tbody tr:hover {
+    background-color: #2c3e50;
+}
+/* Floating calculator button */
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  z-index: 999;
+}
+
+/* Calculator widget */
+.calculator {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 260px;
+  background: #222;
+  color: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+.calculator.hidden {
+  display: none;
+}
+
+.calculator-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#calc-display {
+  width: 100%;
+  height: 40px;
+  font-size: 20px;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.calc-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+.calc-buttons button,
+#calc-equal {
+  padding: 15px;
+  font-size: 18px;
+  background: #444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.calc-buttons button:hover,
+#calc-equal:hover {
+  background: #666;
+}
+
+#close-calculator {
+  background: red;
+  border: none;
+  color: white;
+  font-size: 18px;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+/* Validation styles */
+.is-invalid {
+    border-color: var(--danger-color) !important;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.12) !important;
+}
+
+.field-error {
+    color: #fff;
+    background: var(--danger-color);
+    padding: 8px 10px;
+    border-radius: 6px;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.field-error ul { margin: 0; padding-left: 18px; }
+

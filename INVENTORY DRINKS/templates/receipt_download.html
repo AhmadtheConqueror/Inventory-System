@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Receipt for Sale {{"%03d"|format(sale.id) }}</title>
+    <style>
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            font-size: 12px;
+            color: #333;
+            margin: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            border: 1px solid #eee;
+            padding: 25px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #000;
+        }
+        .header .logo img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 22px;
+            color: #000;
+        }
+        .header p {
+            margin: 2px 0;
+            font-size: 11px;
+        }
+        .receipt-details {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .receipt-details p {
+            margin: 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            border-bottom: 2px solid #333;
+        }
+        td {
+            border-bottom: 1px solid #eee;
+        }
+        .totals-section td {
+            text-align: right;
+            border: none;
+            padding: 4px 10px;
+        }
+        .grand-total {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .grand-total td {
+             border-top: 2px solid #333;
+             padding-top: 10px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 10px;
+            color: #777;
+        }
+        /* NEW STYLES for signature section */
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+        .signature-box {
+            width: 45%;
+            text-align: center;
+        }
+        .signature-line {
+            border-top: 1px solid #333;
+            margin-top: 40px;
+            padding-top: 5px;
+        }
+        .footer-notes {
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/WhatsApp Image 2025-07-17 at 14.21.49_d292557a.jpg') }}" alt="Company Logo" onerror="this.style.display='none'">
+            </div>
+            <div class="business-info">
+                <h1>BELLOSON INVENTORY</h1>
+                <p>GENERAL INVENTORY SALES AND SERVICES</p>
+                <p>Your business address</p>
+                <p>Your business phone</p>
+            </div>
+        </div>
+
+        <div class="receipt-details">
+            <h2>Invoice {{"%03d"|format(sale.id)}}</h2>
+            <p><strong>Customer:</strong> {{ sale.customer.name if sale.customer else "Walk-in Customer" }}</p>
+            <p><strong>Date:</strong> {{ sale.date.strftime('%B %d, %Y %I:%M %p') }}</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Qty</th>
+                    <th>Product</th>
+                    <th>Unit Price</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in sale.items %}
+                <tr>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.product.name }}</td>
+                    <td>₦{{ "%.2f"|format(item.unit_price) }}</td>
+                    <td>₦{{ "%.2f"|format(item.quantity * item.unit_price) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot class="totals-section">
+                <!-- NEW: Total Quantity Row -->
+                <tr>
+                    <td colspan="3">Total Quantity:</td>
+                    <td>{{ sale.items|sum(attribute='quantity') }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Subtotal:</td>
+                    <td>₦{{ "%.2f"|format(sale.total_amount) }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Amount Paid:</td>
+                    <td>₦{{ "%.2f"|format(sale.amount_paid) }}</td>
+                </tr>
+                <tr class="grand-total">
+                    <td colspan="3">Balance Due:</td>
+                    <td>₦{{ "%.2f"|format(sale.balance_due) }}</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- NEW: Signature and notes section -->
+        <div class="footer-notes">
+            <p>Received the above goods in good condition.</p>
+            <p>No refund after payment.</p>
+        </div>
+
+        <div class="signature-section">
+            <div class="signature-box">
+                <div class="signature-line">Manager's Signature</div>
+            </div>
+            <div class="signature-box">
+                <div class="signature-line">Customer's Signature</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Printed by: {{ sale.authorized_by }}</p>
+            <p>Thank you for your patronage!</p>
+        </div>
+    </div>
+</body>
+</html>

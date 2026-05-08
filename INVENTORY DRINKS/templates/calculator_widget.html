@@ -1,0 +1,36 @@
+<!-- Floating Calculator Button -->
+<button id="calc-toggle-btn" onclick="toggleCalculator()">🧮</button>
+
+<!-- Hidden Calculator -->
+<div id="floating-calculator" class="floating-calculator hidden">
+    <div class="calc-header">
+        <span>Calculator</span>
+        <button class="close-btn" onclick="toggleCalculator()">✖</button>
+    </div>
+    <div class="calc-body">
+        <input type="text" id="widget-display" readonly>
+        <div class="calc-buttons">
+            <button onclick="clearDisplay('widget-display')">C</button>
+            <button onclick="appendValue('/', 'widget-display')">÷</button>
+            <button onclick="appendValue('*', 'widget-display')">×</button>
+            <button onclick="deleteLast('widget-display')">⌫</button>
+            <button onclick="appendValue('7', 'widget-display')">7</button>
+            <button onclick="appendValue('8', 'widget-display')">8</button>
+            <button onclick="appendValue('9', 'widget-display')">9</button>
+            <button onclick="appendValue('-', 'widget-display')">−</button>
+            <button onclick="appendValue('4', 'widget-display')">4</button>
+            <button onclick="appendValue('5', 'widget-display')">5</button>
+            <button onclick="appendValue('6', 'widget-display')">6</button>
+            <button onclick="appendValue('+', 'widget-display')">+</button>
+            <button onclick="appendValue('1', 'widget-display')">1</button>
+            <button onclick="appendValue('2', 'widget-display')">2</button>
+            <button onclick="appendValue('3', 'widget-display')">3</button>
+            <button onclick="appendValue('0', 'widget-display')">0</button>
+            <button onclick="appendValue('.', 'widget-display')">.</button>
+            <button onclick="calculateResult('widget-display')" style="grid-column: span 2;">=</button>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='calculator.css') }}">
+<script src="{{ url_for('static', filename='calculator.js') }}" defer></script>
