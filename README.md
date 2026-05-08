@@ -1,4 +1,4 @@
-# Belloson Inventory
+# Inventory System
 
 Flask-based general inventory, sales, cash, debt, expense, invoice, and reporting system. The app creates a fresh local SQLite database on first run and includes optional Clerk authentication plus a Gemini-powered AI analyst on the Reports page.
 
