@@ -80,7 +80,7 @@ GEMINI_API_KEY=your_gemini_api_key
 GEMINI_MODEL=gemini-2.5-flash
 ```
 
-Keep real secrets out of GitHub. Use repository or hosting-provider environment variables for deployment.
+
 
 ## Database
 
@@ -125,9 +125,4 @@ Run with Gunicorn on a Linux host:
 gunicorn app:app
 ```
 
-## Security Notes
 
-- Rotate any secret that was ever exposed before this cleanup.
-- Keep `.env` private and commit only placeholder examples.
-- Set a stable `FLASK_SECRET_KEY` in production.
-- Use HTTPS and provider-managed environment variables for public deployments.
